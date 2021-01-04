@@ -7,7 +7,22 @@
 		"test": "echo \"Error: no test specified\" && exit 1",
 		"start": "webpack serve --config config/webpack.dev.js",
 		"build": "webpack --config config/webpack.prod.js",
-		"build:dev": "webpack --config config/webpack.dev.js"
+		"build:dev": "webpack --config config/webpack.dev.js",
+		"report": "webpack-bundle-analyzer --port 8123 dist/stats.json",
+		"eslint": "eslint --ext .tsx,.ts,.js --fix ./src",
+		"fix": "prettier .prettierrc.js --write"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"./src/*.{ts,tsx,js}": [
+			"yarn eslint",
+			"yarn fix",
+			"git add"
+		]
 	},
 	"keywords": [
 		"react",
@@ -17,8 +32,16 @@
 	"author": "wangxiaofeng",
 	"license": "ISC",
 	"dependencies": {
+		"@typescript-eslint/eslint-plugin": "^4.11.1",
+		"@typescript-eslint/parser": "^4.11.1",
+		"babel-eslint": "^10.1.0",
+		"eslint-config-prettier": "^7.1.0",
+		"eslint-plugin-prettier": "^3.3.0",
+		"eslint-plugin-react": "^7.22.0",
+		"eslint-plugin-react-hooks": "^4.2.0",
 		"jest": "^26.6.3",
 		"node": "^15.4.0",
+		"prettier": "^2.2.1",
 		"react": "^17.0.1",
 		"react-dom": "^17.0.1"
 	},
@@ -34,18 +57,24 @@
 		"@types/react-dom": "^17.0.0",
 		"babel-loader": "^8.2.2",
 		"clean-webpack-plugin": "^3.0.0",
+		"compression-webpack-plugin": "^7.1.1",
 		"copy-webpack-plugin": "^7.0.0",
 		"css-loader": "^5.0.1",
 		"css-minimizer-webpack-plugin": "^1.1.5",
+		"eslint": "^7.17.0",
+		"eslint-loader": "^4.0.2",
 		"file-loader": "^6.2.0",
 		"friendly-errors-webpack-plugin": "^1.7.0",
-		"html-webpack-plugin": "^4.5.0",
+		"html-webpack-plugin": "^5.0.0-beta.3",
+		"husky": "^4.3.6",
 		"less": "^4.0.0",
 		"less-loader": "^7.2.1",
+		"lint-staged": "^10.5.3",
 		"mini-css-extract-plugin": "^1.3.3",
 		"style-loader": "^2.0.0",
 		"typescript": "^4.1.3",
 		"webpack": "^5.11.0",
+		"webpack-bundle-analyzer": "^4.3.0",
 		"webpack-cli": "^4.3.0",
 		"webpack-dev-server": "^3.11.0",
 		"webpack-merge": "^5.7.3"
