@@ -1,22 +1,22 @@
 /*
  * @Author: your name
  * @Date: 2020-12-31 15:00:27
- * @LastEditTime: 2021-01-05 14:11:45
+ * @LastEditTime: 2021-01-05 14:27:04
  * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-webpack5-tmplate\config\pluginsConfig.js
  */
-const path = require('path')
+// const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const CopyWebpackPlugin = require('copy-webpack-plugin')
+// const CopyWebpackPlugin = require('copy-webpack-plugin')
 const webpack = require('webpack')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer')
-const { isEmptyDir } = require('./utils')
-const isEmptyAssets = isEmptyDir(path.resolve(__dirname, '../assets'))
+// const { isEmptyDir } = require('./utils')
+// const isEmptyAssets = isEmptyDir(path.resolve(__dirname, '../assets'))
 module.exports = {
   getPlugins: (env = 'development', globalVar = {}, options = []) => {
     const plugins = [
@@ -47,7 +47,6 @@ module.exports = {
       ...options,
     ]
     if (env === 'production') {
-      plugins.push(new CleanWebpackPlugin())
       plugins.push(
         new CompressionWebpackPlugin({
           test: /\.js$|\.css$/,
@@ -61,17 +60,13 @@ module.exports = {
         }),
       )
     }
-    let copyList = []
-    if (!isEmptyAssets) {
-      copyList.push({ from: path.resolve(__dirname, '../assets'), to: 'assets' })
-    }
-    copyList.length > 0
-      ? plugins.push(
-          new CopyWebpackPlugin({
-            patterns: copyList,
-          }),
-        )
-      : null
+
+    //   plugins.push(
+    //       new CopyWebpackPlugin({
+    //         patterns: [{ from: path.resolve(__dirname, '../assets'), to: 'assets' }],
+    //       }),
+    //     )
+    plugins.push(new CleanWebpackPlugin())
     return plugins
   },
 }
