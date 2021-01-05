@@ -1,8 +1,8 @@
 /*
  * @Author: your name
  * @Date: 2020-12-31 15:00:27
- * @LastEditTime: 2021-01-04 16:31:32
- * @LastEditors: your name
+ * @LastEditTime: 2021-01-05 12:04:41
+ * @LastEditors: Please set LastEditors
  * @Description: In User Settings Edit
  * @FilePath: \react-webpack5-tmplate\config\webpack.dev.js
  */
@@ -21,6 +21,9 @@ module.exports = merge(common, {
     strictExportPresence: true,
     rules: getLoaders('development'),
   },
-  plugins: getPlugins('development'),
+  plugins: getPlugins('development', {
+    API_BASE_URL: JSON.stringify('https://dev.api.example.com'),
+    PUBLIC_URL: JSON.stringify('public'),
+  }),
   optimization: getOptimization('development'),
 })
